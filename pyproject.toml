@@ -10,6 +10,7 @@ python = "^3.10"
 picotui = "^1.2.1"
 loguru = "^0.6.0"
 tomlkit = "^0.11.6"
+sap-cf-logging = "^4.2.4"
 
 [tool.poetry.dev-dependencies]
 

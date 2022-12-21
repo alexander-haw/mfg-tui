@@ -30,6 +30,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "sap-cf-logging"
+version = "4.2.4"
+description = "Python logging library to emit JSON logs in a SAP CloudFoundry environment"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "tomlkit"
 version = "0.11.6"
 description = "Style preserving TOML library"
@@ -51,11 +59,12 @@ dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4ac6fe3a08ffe62b7d3386dc52ea238d3d82917ee06d02fec5a39babb6bfab1c"
+content-hash = "860b16494cbe8e14f9891125ad842eaf9ca21c806b382cf8de2b112cccd7bfd3"
 
 [metadata.files]
 colorama = []
 loguru = []
 picotui = []
+sap-cf-logging = []
 tomlkit = []
 win32-setctime = []

@@ -1,76 +1,28 @@
-from picotui.widgets import *
-from picotui.defs import *
-from picotui.dialogs import *
 
-from tui_context import Wcontext
+from picotui.screen import Screen
+from picotui.dialogs import Dialog
+from picotui.menu import WMenuBar, WMenuBox
 
-with Wcontext("Gauge Calibration") as term:
-    term.get_assembly_info()
+from context import TerminalContext as Term, Action
+from defs import Color as C
 
-with Wcontext("Gauge Calibration") as term:
-    term.form_label("Enter the gauge readings shown on the unit's insturment panel.")
-    term.form_newline()
-
-    term.form_input("Altimeter     ", r"\d{1,4}.\d{2}")
-    term.form_input("Heading       ", r"\d{1,3}\w")
-    term.form_input("Airspeed      ", r"\d{1,4}.\d{2}")
-    term.form_input("Attitude      ", r"\d+")
-    term.form_input("Vertical Speed", r"\d+\w{3}")
-
-    term.form_newline()
-    term.form_label("Press 'OK' when all readings have been entered.")
-    term.form_label("End the program at any time by pressing 'CANCEL'.")
+if __name__ == '__main__':
     
-    term.form_ok_cancel()
-    term.dialog.loop()
+    with Term("Example App", C.BLACK, 2) as win:
 
-with Wcontext("Gauge Calibration: Altimiter [1/5]") as term:
-    term.form_label("Use the arrows to adjust the panel reading until it matches the value shown.")
-    term.form_newline()
-    term.form_newline()
-    term.form_inc_dec("0.00")
+        win.add_label(12, 1, "Press F9 for menu")
+        win.add_label(1, 2,"Label:")
+        win.add_list_box(1, 3, 16, [f"choice{i}" for i in range(3)])
+        win.add_drop_down(1, 8, 10, ["Red", "Green", "Yellow"])
+        win.add_check_box(11, 8, "Red")
+        win.add_check_box(11, 9, "Green")
+        win.add_check_box(11, 10, "Yellow")
+        win.add_radio_button(12, 20, ["Red", "Green", "Yellow"])
 
-    term.form_newline()
-    term.form_ok_cancel()
-    term.dialog.loop()
-with Wcontext("Gauge Calibration: Heading [2/5]") as term:
-    term.form_label("Use the arrows to adjust the panel reading until it matches the value shown.")
-    term.form_newline()
-    term.form_newline()
-    term.form_inc_dec("270")
+        win.add_button(10, 11, 8, Action.OK)
+        win.add_button(23, 11, 8, Action.CANCEL)
+        
+        global res
+        res = win.loop()
 
-    term.form_newline()
-    term.form_ok_cancel()
-    term.dialog.loop()
-with Wcontext("Gauge Calibration: Airspeed [3/5]") as term:
-    term.form_label("Use the arrows to adjust the panel reading until it matches the value shown.")
-    term.form_newline()
-    term.form_newline()
-    term.form_inc_dec("0.00")
-
-    term.form_newline()
-    term.form_ok_cancel()
-    term.dialog.loop()
-with Wcontext("Gauge Calibration: Attitude [4/5]") as term:
-    term.form_label("Use the arrows to adjust the panel reading until it matches the value shown.")
-    term.form_newline()
-    term.form_newline()
-    term.form_inc_dec("0")
-
-    term.form_newline()
-    term.form_ok_cancel()
-    term.dialog.loop()
-with Wcontext("Gauge Calibration: Vertical Speed [5/5]") as term:
-    term.form_label("Use the arrows to adjust the panel reading until it matches the value shown.")
-    term.form_newline()
-    term.form_newline()
-    term.form_inc_dec("00.00")
-
-    term.form_newline()
-    term.form_ok_cancel()
-    term.dialog.loop()
-
-with Wcontext("Gauge Calibration") as term:
-    term.form_label("Calibration complete.")
-    term.form_ok()
-    term.dialog.loop()
+print("Result:", res)
